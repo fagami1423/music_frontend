@@ -1,17 +1,21 @@
-// import logo from './logo.svg';
+
 import "./App.css";
-import Home from "./components/Home";
-import Contact from "./components/Contact";
-import MusicList from "./components/MusicList";
+import Main from "./pages/Main";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import Music from "./pages/Music";
+import MusicList from "./pages/MusicList";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="container-full text-center bg-dark text-light">
+
       <Routes>
-        <Route path="/" element={<Home content="Home "/>}></Route>
-        <Route path="/musiclist" element={<Home content={<MusicList />} />}></Route>
-        <Route path="/contact" element={<Home content={<Contact />}/>}></Route>
+        <Route path="/" element={<Main content={<Home />} />}></Route>
+        <Route path="/music" element={<Main content={<Music />} />}></Route>
+        <Route path="/musiclist" element={<Main content={<MusicList />} />}></Route>
+        <Route path="/contact" element={<Main content={<Contact />}/>}></Route>
       </Routes>
     </div>
   );
