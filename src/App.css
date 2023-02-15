@@ -7,6 +7,12 @@
   pointer-events: none;
 }
 
+.custom-circle{
+  width: 200px;
+  height: 200px;
+  background-color: rgb(56, 179, 216);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
