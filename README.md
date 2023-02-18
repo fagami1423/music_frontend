@@ -4,13 +4,11 @@
 
 In the project directory, you can run:
 
-"Versions used":
-'node: '
+To install node please follow the instruction: https://github.com/nvm-sh/nvm
 
 ### Run the commands 
 To run the project
 ```
-version: 19.4.0
 npm install
 ```
 
