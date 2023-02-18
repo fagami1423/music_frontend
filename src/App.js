@@ -9,7 +9,7 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="container-full text-center bg-dark text-light">
+    <div className="container-full text-center text-light">
 
       <Routes>
         <Route path="/" element={<Main content={<Home />} />}></Route>

@@ -1,5 +1,6 @@
 body{
   background-color: black;
+  background: linear-gradient(to right, rgb(12, 35, 53) , rgb(51, 51, 54));
 }
 .App {
   text-align: center;
