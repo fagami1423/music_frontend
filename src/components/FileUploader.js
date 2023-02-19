@@ -1,3 +1,5 @@
+import React, {useState} from 'react';
+
 import {useRef} from "react";
 
 const FileUploader = ({onFileSelectSuccess,onFileSelectError}) => {
@@ -6,15 +8,16 @@ const FileUploader = ({onFileSelectSuccess,onFileSelectError}) => {
     const handleFileInput = (e) => {
         // handle validations
         const file = e.target.files[0];
-        if (file.size > 1024)
-            onFileSelectError({ error: "File size cannot exceed more than 1MB" });
+
+        if (file.size > 10000)
+            onFileSelectError({ error: "File size cannot exceed more than 2MB" });
         else onFileSelectSuccess(file);
-};
+    };
 
     return(
         <div className="file-uploader"> 
             <input type="file" onChange={handleFileInput}></input>
-            <button onClick={e => fileInput.current && fileInput.current.click()} className="btn btn-primary"></button>
+            <button onClick={e => fileInput.current && fileInput.current.click()} className="btn bg-dark btn-primary">x</button>
         </div>
     )
 }
