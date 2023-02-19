@@ -1,12 +1,11 @@
 import MusicPlayerSlider from "../components/MusicPlayerSlider";
+import NoteImage from '../components/NoteImage'
+
 
 function MusicList(){
     return (
         <>
-            <div className="row justify-content-center">
-                <img className="music-background" src={process.env.PUBLIC_URL+'/main.jpg'} alt="Main"></img>
-                <h2>Music Player</h2>
-            </div>
+            <NoteImage />
             <div className="row justify-content-center">
                 <MusicPlayerSlider />
 

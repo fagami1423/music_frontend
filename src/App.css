@@ -1,6 +1,6 @@
 body{
   background-color: black;
-  background: linear-gradient(to right, rgb(12, 35, 53) , rgb(51, 51, 54));
+  background: linear-gradient(to right, rgb(0, 0, 0) , rgb(125, 125, 158));
 }
 .App {
   text-align: center;
@@ -18,9 +18,12 @@ body{
 }
 
 .music-background{
-  height: 75%;
-  width: 60%;
-  margin-bottom: 20px;
+  height: 90%;
+  width: 70%;
+  margin-bottom: 60px;
+  /* background-color: rgb(300,300,300); */
+  background:transparent;
+  /* opacity: 0.9 */
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -22,8 +22,8 @@ const Widget = styled('div')(({ theme }) => ({
   margin: 'auto',
   position: 'relative',
   zIndex: 1,
-  backgroundColor: 'rgb(68, 68, 68)',
-  backdropFilter: 'blur(40px)',
+  backgroundColor: 'rgb(150, 150, 173)',
+  backdropFilter: 'blur(40px)'
 }));
 
 const CoverImage = styled('div')({

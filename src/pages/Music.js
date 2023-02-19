@@ -1,15 +1,13 @@
 
 import MSlider from "../components/MSlider";
+import NoteImage from '../components/NoteImage'
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 const Music=()=>{
     return (
         <>
-            <div className="row justify-content-center">
-                <img className="music-background" src={process.env.PUBLIC_URL+'/main.jpg'} alt="Main"></img>
-                <p>Generate the music with AI</p>
-            </div>
+            <NoteImage />
             <div className="row justify-content-center">
 
                 <Box sx={{ width: 500,textAlign:'left' }}>
