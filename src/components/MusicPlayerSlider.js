@@ -13,7 +13,6 @@ import VolumeUpRounded from '@mui/icons-material/VolumeUpRounded';
 import VolumeDownRounded from '@mui/icons-material/VolumeDownRounded';
 
 
-
 const Widget = styled('div')(({ theme }) => ({
   padding: 16,
   borderRadius: 16,
@@ -48,7 +47,7 @@ const TinyText = styled(Typography)({
 
 export default function MusicPlayerSlider() {
   const theme = useTheme();
-  const duration = 200; // seconds
+  const [duration,setDuration] = React.useState(200);
   const [position, setPosition] = React.useState(32);
   const [paused, setPaused] = React.useState(false);
   function formatDuration(value) {
@@ -59,6 +58,34 @@ export default function MusicPlayerSlider() {
   const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
   const lightIconColor =
     theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
+
+  // play music with Audio object the sound 
+  const sound = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+  const [audio] = React.useState(new Audio(sound));
+  
+  
+  const getDuration = (arrayBuffer) => {
+    return new Promise((resolve, reject) => {
+      const audioContext = new AudioContext();
+      audioContext.decodeAudioData(arrayBuffer, (buffer) => {
+        resolve(buffer.duration);
+      }, reject);
+    });
+  };
+  const playAudio = async () => {
+      audio.src = sound;
+      audio.addEventListener("loadedmetadata", function() {
+        console.log(audio.duration);
+        setDuration(audio.duration);
+      });
+    
+      setPaused(!paused);
+      if(paused === false){
+        audio.pause();
+      }else{
+        audio.play();
+      }
+  };
   return (
     <Box sx={{ width: '100%',overflow:"hidden" }}>
       <Widget>
@@ -140,7 +167,7 @@ export default function MusicPlayerSlider() {
           </IconButton>
           <IconButton
             aria-label={paused ? 'play' : 'pause'}
-            onClick={() => setPaused(!paused)}
+            onClick={playAudio}
           >
             {paused ? (
               <PlayArrowRounded
