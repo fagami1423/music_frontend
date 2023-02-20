@@ -1,14 +1,7 @@
 import { useState } from "react";
 import FileUploader from "./FileUploader";
 
-// const formReducer = (state, event) => {
-//     return {
-//       ...state,
-//       [event.target.name]: event.target.value
-//     }
-//    };
 const UploadForm = ()=>{
-    // const [formData, setFormData] = useReducer(formReducer, {});
     const [selectedFile, setSelectedFile] = useState(null);
 
     const submitForm = (e) => {

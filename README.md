@@ -1,5 +1,6 @@
 # Music Generation Frontend
-...
+
+The project aims to help the music producers or normal users to play around with music created by Artificial Intelligence.
 
 
 In the project directory, you can run:
