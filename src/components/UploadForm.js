@@ -19,7 +19,7 @@ const UploadForm = ()=>{
             }
           };
         const response = await axios.post(`${baseUrl}/upload-music`, formData, axiosConfig);
-            
+        window.location="/music";
         // history.push("/music")
         // for(var pair of formData.entries()) {
         //     console.log(`${pair[0]}: ${pair[1]}`);

@@ -12,6 +12,7 @@ import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import VolumeUpRounded from '@mui/icons-material/VolumeUpRounded';
 import VolumeDownRounded from '@mui/icons-material/VolumeDownRounded';
 
+import baseUrl from '../Config';
 
 const Widget = styled('div')(({ theme }) => ({
   padding: 16,
@@ -45,7 +46,8 @@ const TinyText = styled(Typography)({
   letterSpacing: 0.2,
 });
 
-export default function MusicPlayerSlider() {
+export default function MusicPlayerSlider(prop) {
+  
   const theme = useTheme();
   const [duration,setDuration] = React.useState(200);
   const [position, setPosition] = React.useState(32);
@@ -60,7 +62,7 @@ export default function MusicPlayerSlider() {
     theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
 
   // play music with Audio object the sound 
-  const sound = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+  const sound = baseUrl+prop.musicFile.url;
   const [audio] = React.useState(new Audio(sound));
   
   
@@ -73,7 +75,7 @@ export default function MusicPlayerSlider() {
     });
   };
   const playAudio = async () => {
-      audio.src = sound;
+      audio.src = baseUrl+prop.musicFile.url;
       audio.addEventListener("loadedmetadata", function() {
         console.log(audio.duration);
         setDuration(audio.duration);
@@ -101,10 +103,10 @@ export default function MusicPlayerSlider() {
               Jun Pulse
             </Typography>
             <Typography noWrap>
-              <b>Linking Park - (Numb)</b>
+              <b>{prop.musicFile.filename}</b>
             </Typography>
             <Typography noWrap letterSpacing={-0.25}>
-              Numb
+              
             </Typography>
           </Box>
         </Box>
