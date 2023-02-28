@@ -1,0 +1,36 @@
+.Chatbot-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+  }
+  
+  .Chatbot {
+    position: fixed;
+    bottom: 30px;
+    right: 0px;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border-radius: 5px 0 0 0;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .Chatbot.closed {
+    transform: translateX(100%);
+  }
+  
+  .Chatbot.open {
+    transform: translateX(0);
+  }
+
+  .Chatbot-form {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+  }

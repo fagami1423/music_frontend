@@ -1,5 +1,6 @@
 import Sidebar from "../components/SideBar";
 import Content from "../components/Content";
+import Chatbot from "../components/Chatbot";
 
 function Main(props) {
   return (
@@ -11,6 +12,9 @@ function Main(props) {
         
         <div className="row">
             <Content content={props.content} />
+        </div>
+        <div className="row">
+          <Chatbot />
         </div>
 
       </div>
