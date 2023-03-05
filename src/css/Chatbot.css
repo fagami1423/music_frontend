@@ -34,3 +34,64 @@
     background-color: #f5f5f5;
     border-top: 1px solid #ddd;
   }
+
+  .Chatbot-messages-wrapper {
+    height: 500px; /* Set the desired height */
+    overflow-y: auto;
+  }
+  
+  
+  .Chatbot-messages {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+
+  /* animation like translate or transfrom */
+  .User-message {
+    align-self: flex-start;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    margin:5px;
+    margin-right: 30%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    animation: userMessageAnimation 0.5s ease-in-out;;
+  }
+  
+  .Bot-message {
+    align-self: flex-end;
+    background-color: #f1f1f1;
+    color: black;
+    padding: 10px;
+    margin-left: 30%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    animation: botMessageAnimation 0.5s ease-in-out;
+  }
+
+  @keyframes userMessageAnimation {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  }
+  @keyframes botMessageAnimation {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  }
+  

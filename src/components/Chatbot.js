@@ -2,22 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import '../css/Chatbot.css';
 
-// class Chatbot extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       isOpen: false, // boolean to track whether the chatbot is open or closed
-//       messages: [], // array to store chat messages
-//       inputValue: '', // input value for user messages
-//     };
-//     this.handleInputChange = this.handleInputChange.bind(this);
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//     this.handleToggle = this.handleToggle.bind(this);
-//   }
-
-//   // function to handle input change
-
 const Chatbot=(props)=>{
+  const messagesEndRef = React.useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -31,7 +17,7 @@ const Chatbot=(props)=>{
     };
 
     messages.push(newMessage);
-    setInputValue(event.target.value);
+    setInputValue('');
     // call function to handle bot response
     handleBotResponse();
   }
@@ -47,8 +33,9 @@ const Chatbot=(props)=>{
       text: "Hi! How can I assist you?",
       isUser: false // mark bot messages as false
     };
+    setInputValue('');
     messages.push(botResponse);
-    setMessages(messages);
+    //setMessages(botResponse);
   }
 
   // function to handle chatbot toggle button
@@ -56,6 +43,13 @@ const Chatbot=(props)=>{
     console.log("im here");
     setIsOpen(!isOpen);
   }
+
+  React.useEffect(() => {
+    if (messagesEndRef.current) {
+      // Scroll to the end of the messages list
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
     return (
       <div>
@@ -65,22 +59,24 @@ const Chatbot=(props)=>{
         <div className={`Chatbot ${isOpen ? "open" : "closed"}`}>
           {isOpen &&
             <>
-              <div className="Chatbot-messages">
-                {messages.map((message, index) => (
-                  <div key={index} className={message.isUser ? "User-message" : "Bot-message"}>
-                    {message.text}
-                  </div>
-                ))}
+            <div className="Chatbot-messages-wrapper">
+                <div className="Chatbot-messages">
+                  {messages.map((message, index) => (
+                    <div key={index} className={message.isUser ? "User-message" : "Bot-message"}>
+                      {message.text}
+                    </div>
+                  ))}
+                </div>
+                <form onSubmit={handleSubmit} className="Chatbot-form">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    placeholder="Type a message..."
+                  />
+                  <button type="submit">Send</button>
+                </form>
               </div>
-              <form onSubmit={handleSubmit} className="Chatbot-form">
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={handleInputChange}
-                  placeholder="Type a message..."
-                />
-                <button type="submit">Send</button>
-              </form>
             </>
           }
         </div>
