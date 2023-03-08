@@ -29,7 +29,7 @@ const MusicList = () =>{
     return (
         <>
             <NoteImage />
-            <div className="row justify-content-left">
+            <div className="row justify-content-left bg-dark">
                 {music ? (
                     <ul className='list-unstyled'>
                         {music.map((item) => (
