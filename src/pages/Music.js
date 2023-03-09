@@ -16,9 +16,9 @@ const Music=()=>{
                     </Typography>
                 </Box>
                 <MSlider  title="Parameter1" default="30" />
-                <MSlider  title="Parameter2" default="30"/>
+                <MSlider  title="Parameter2" default="40"/>
                 <MSlider  title="Parameter3" default="30"/>
-                <MSlider  title="Parameter4" default="30"/>
+                <MSlider  title="Parameter4" default="60"/>
                 <MSlider  title="Parameter5" default="30"/>
                 <form>
                 <button className="btn btn-primary">Generate</button>
