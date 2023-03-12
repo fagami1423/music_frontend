@@ -1,7 +1,7 @@
 
-import { useEffect, useLayoutEffect, useState } from 'react';
-import axios from 'axios';
-import baseUrl from '../Config';
+import { useEffect, useState } from 'react';
+// import axios from 'axios';
+import api from '../Config';
 
 import NoteImage from '../components/NoteImage'
 import MusicPlayerSlider from "../components/MusicPlayerSlider";
@@ -14,16 +14,23 @@ const MusicList = () =>{
     }; 
 
     useEffect(() => {
-        axios.get(`${baseUrl}/get-music`)
-            .then((response) => {
-                
-                setMusic(response.data.file_urls);
-                setSelectSong(response.data.file_urls[0]);
-            })
-            .catch((error) => {
-                console.log(error);
-            });                       
-      }, []);
+        const fetchData = async () => {
+            try {
+              const response = await api.get(`/get-music`);
+              setMusic(response.data.file_urls);
+              setSelectSong(response.data.file_urls[0]);
+              console.log(response.data);
+            } catch (error) {
+              console.log(error);
+            }
+          };
+          const intervalId = setInterval(() => {
+            fetchData();
+          }, 2000);
+          return () => clearInterval(intervalId);
+    }, []);
+        
+    
 
     
     return (
@@ -34,7 +41,7 @@ const MusicList = () =>{
                     <ul className='list-unstyled'>
                         {music.map((item) => (
                             <li key={item.filename}>
-                                <a onClick={() => handleSelect(item)} className="unstyled">{item.filename}</a>
+                                <span onClick={() => handleSelect(item)} className="unstyled">{item.filename}</span>
                             </li>
                         ))}
                     </ul>

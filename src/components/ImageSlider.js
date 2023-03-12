@@ -39,7 +39,7 @@ const ImageSlider = ({ images }) => {
             />
             ))}
         </div>
-        <div ClassName="slider-content">
+        <div className="slider-content">
             <h1>{user.name}</h1>
             <h2>{user.designation}</h2>
             <p>{user.text}</p>

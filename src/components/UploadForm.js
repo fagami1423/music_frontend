@@ -1,8 +1,8 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useState } from "react";
 // import { useHistory } from "react-router-dom";
 
-import baseUrl from '../Config';
+import api from '../Config';
 import FileUploader from "./FileUploader";
 
 const UploadForm = ()=>{
@@ -13,17 +13,18 @@ const UploadForm = ()=>{
         e.preventDefault();
         const formData = new FormData();
         formData.append("file",selectedFile);
+        for(var pair of formData.entries()) {
+            console.log(`${pair[0]}: ${pair[1]}`);
+          }
         let axiosConfig = {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
           };
-        const response = await axios.post(`${baseUrl}/upload-music`, formData, axiosConfig);
-        window.location="/music";
+        api.post(`/upload-music`, formData, axiosConfig);
+        // xwindow.location="/music";
         // history.push("/music")
-        // for(var pair of formData.entries()) {
-        //     console.log(`${pair[0]}: ${pair[1]}`);
-        //   }
+        
         
         
     };
