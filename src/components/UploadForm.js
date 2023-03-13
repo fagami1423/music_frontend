@@ -22,10 +22,8 @@ const UploadForm = ()=>{
             }
           };
         api.post(`/upload-music`, formData, axiosConfig);
-        // xwindow.location="/music";
+        window.location="/music";
         // history.push("/music")
-        
-        
         
     };
     return (

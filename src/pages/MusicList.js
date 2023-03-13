@@ -26,7 +26,7 @@ const MusicList = () =>{
           };
           const intervalId = setInterval(() => {
             fetchData();
-          }, 2000);
+          }, 10000);
           return () => clearInterval(intervalId);
     }, []);
         
