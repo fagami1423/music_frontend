@@ -1,4 +1,4 @@
-# Music Generation Frontend
+# Music Generation User Interface
 
 The project aims to help the music producers or normal users to play around with music created by Artificial Intelligence.
 
