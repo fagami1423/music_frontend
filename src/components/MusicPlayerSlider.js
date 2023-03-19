@@ -12,7 +12,7 @@ import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import VolumeUpRounded from '@mui/icons-material/VolumeUpRounded';
 import VolumeDownRounded from '@mui/icons-material/VolumeDownRounded';
 
-import baseUrl from '../Config';
+import {api, baseUrl} from '../Config';
 
 const Widget = styled('div')(({ theme }) => ({
   padding: 16,
@@ -21,7 +21,7 @@ const Widget = styled('div')(({ theme }) => ({
   maxWidth: '100%',
   margin: 'auto',
   position: 'relative',
-  zIndex: 1,
+  // zIndex: 1,
   backgroundColor: 'rgb(150, 150, 173)',
   backdropFilter: 'blur(40px)'
 }));
@@ -52,6 +52,9 @@ export default function MusicPlayerSlider(prop) {
   const [duration,setDuration] = React.useState(200);
   const [position, setPosition] = React.useState(32);
   const [paused, setPaused] = React.useState(false);
+  const [volume, setVolume] = React.useState(30);
+  const [audioCtx, setAudioCtx] = React.useState(null);
+  const [gainNode, setGainNode] = React.useState(null);
   function formatDuration(value) {
     const minute = Math.floor(value / 60);
     const secondLeft = value - minute * 60;
@@ -75,12 +78,12 @@ export default function MusicPlayerSlider(prop) {
   //   });
   // };
   const playAudio = async () => {
-      audio.src = baseUrl+prop.musicFile.url;
+      // const response = await api.get(`/get-music`);
+      audio.src = sound;
+      console.log(audio.src);
       audio.addEventListener("loadedmetadata", function() {
-        console.log(audio.duration);
         setDuration(audio.duration);
       });
-    
       setPaused(!paused);
       if(paused === false){
         audio.pause();
@@ -88,6 +91,27 @@ export default function MusicPlayerSlider(prop) {
         audio.play();
       }
   };
+
+  const handleVolumeChange = (event, newValue) => {
+    setVolume(newValue);
+    if (audioCtx) {
+      gainNode.gain.value = newValue / 100;
+    }
+  };
+
+  React.useEffect(() => {
+    const newAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const newGainNode = newAudioCtx.createGain();
+    newGainNode.connect(newAudioCtx.destination);
+  
+    setAudioCtx(newAudioCtx);
+    setGainNode(newGainNode);
+  
+    return () => {
+      newGainNode.disconnect();
+      newAudioCtx.close();
+    };
+  }, []);
   return (
     <Box sx={{ width: '100%',overflow:"hidden" }}>
       <Widget>
@@ -189,6 +213,8 @@ export default function MusicPlayerSlider(prop) {
           <Slider
             aria-label="Volume"
             defaultValue={30}
+            value={volume}
+            onChange={handleVolumeChange}
             sx={{
               color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
               '& .MuiSlider-track': {

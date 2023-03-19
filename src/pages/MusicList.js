@@ -24,10 +24,11 @@ const MusicList = () =>{
               console.log(error);
             }
           };
-          const intervalId = setInterval(() => {
-            fetchData();
-          }, 10000);
-          return () => clearInterval(intervalId);
+        fetchData();
+        //   const intervalId = setInterval(() => {
+        //     fetchData();
+        //   }, 10000);
+        //   return () => clearInterval(intervalId);
     }, []);
         
     
@@ -36,9 +37,31 @@ const MusicList = () =>{
     return (
         <>
             <NoteImage />
-            <div className="row justify-content-left bg-dark">
+            <div className="row justify-content-left">
+                <div className="music-list mx-auto justify-content-left w-50">
+                    {music ? (
+                    <ul className="list-unstyled">
+                        {music.map((item) => (
+                        <li key={item.filename} className="text-left">
+                            <span
+                            onClick={() => handleSelect(item)}
+                            className="unstyled"
+                            style={{ cursor: "pointer" }}
+                            >
+                            {item.filename}
+                            </span>
+                        </li>
+                        ))}
+                    </ul>
+                    ) : (
+                    <div>loading...</div>
+                    )}
+                </div>
+            </div>
+
+            {/* <div className="row justify-content-center music-list">
                 {music ? (
-                    <ul className='list-unstyled'>
+                    <ul className='list-unstyled text-left'>
                         {music.map((item) => (
                             <li key={item.filename}>
                                 <span onClick={() => handleSelect(item)} className="unstyled">{item.filename}</span>
@@ -46,7 +69,7 @@ const MusicList = () =>{
                         ))}
                     </ul>
                 ):(<div>loading...</div>)}
-            </div>
+            </div> */}
             <div className="row justify-content-center">
                 
                 <MusicPlayerSlider musicFile={selectSong}  />
