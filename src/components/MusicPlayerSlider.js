@@ -69,14 +69,7 @@ export default function MusicPlayerSlider(prop) {
   const [audio] = React.useState(new Audio(sound));
   
   
-  // const getDuration = (arrayBuffer) => {
-  //   return new Promise((resolve, reject) => {
-  //     const audioContext = new AudioContext();
-  //     audioContext.decodeAudioData(arrayBuffer, (buffer) => {
-  //       resolve(buffer.duration);
-  //     }, reject);
-  //   });
-  // };
+  
   const playAudio = async () => {
       // const response = await api.get(`/get-music`);
       audio.src = sound;
