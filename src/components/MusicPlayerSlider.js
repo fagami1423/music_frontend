@@ -99,7 +99,7 @@ export default function MusicPlayerSlider(prop) {
   
     setAudioCtx(newAudioCtx);
     setGainNode(newGainNode);
-  
+    console.log(audioCtx,gainNode);
     return () => {
       newGainNode.disconnect();
       newAudioCtx.close();
