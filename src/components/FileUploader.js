@@ -1,11 +1,10 @@
-import React from 'react';
+// import {React} from 'react';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
-
-import {useRef,useState} from "react";
+import React, {useRef,useState} from "react";
 
 const FileUploader = ({onFileSelectSuccess,onFileSelectError}) => {
-    const fileInput = useRef(null)
-    const [element, setElement] = useState(<span>Upload file   </span>);
+    // const fileInput = useRef(null)
+    const [element, setElement] = useState(<span>Upload File</span>);
 
     const handleFileInput = (e) => {
         // handle validations

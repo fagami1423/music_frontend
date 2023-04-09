@@ -33,7 +33,7 @@ const UploadForm = ()=>{
                     onFileSelectSuccess={(file) => setSelectedFile(file)}
                     onFileSelectError={({ error }) => alert(error)}
                 />
-                <button onClick={submitForm} className="btn btn-primary bg-dark justify-content-right">Generate</button>
+                <button onClick={submitForm} className="btn btn-primary bg-dark justify-content-right">Mix</button>
             </form>
         </div>
     )

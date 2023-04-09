@@ -2,6 +2,7 @@
 import "./App.css";
 // import ImageSlider.css from css folder
 import "./css/ImageSlider.css";
+import "./css/Home.css";
 import Main from "./pages/Main";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";

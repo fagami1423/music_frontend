@@ -1,0 +1,156 @@
+/* .app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+   */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    transition: all 2s ease-in-out;
+    transform-origin: center top
+}
+
+/* button {
+    margin: 0 10px;
+} */
+
+.generate-options,
+.mix-options {
+    display: none;
+    animation: fade-in 1s ease-in-out;
+}
+
+.generate-options.show,
+.mix-options.show {
+    display: block;
+    font-size: large;
+    animation: fade-out 1s ease-in-out;
+}
+button {
+    font-size: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 0 20px;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .button1.active {
+    transform: scale(1.2);
+  }
+  
+  .button2.active {
+    transform: scale(0.8);
+  }
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.image-container {
+    position: relative;
+    animation: jump-float 2s ease-in-out infinite;
+  }
+  
+  @keyframes jump-float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0) rotate(-5deg);
+    }
+  }
+
+  .tile {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    color: rgb(117, 110, 110);
+    background-color: #f0f0f0;
+    text-align: center;
+    line-height: 100px;
+    font-weight: bold;
+    font-size: 24px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .tile:hover {
+    background-color: #cec8c8;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .radio-button:checked + .tile {
+    background-color: #000;
+    color: #fff;
+    border-color: #000;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+  
+  .generate-button,
+  .mix-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #1e1d1d;
+    border: 2px solid #ccc;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .generate-button.active,
+  .mix-button.active {
+    transform: scale(1.1);
+    color: black;
+    background-color: #f1f1f1;
+  }
+  
+  .button-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .generate-button i,
+  .mix-button i {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }

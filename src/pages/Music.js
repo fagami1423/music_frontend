@@ -3,6 +3,7 @@ import MSlider from "../components/MSlider";
 import NoteImage from '../components/NoteImage'
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import React from 'react';
 
 const Music=()=>{
     const [temperature, setTemperature] = React.useState(30);
