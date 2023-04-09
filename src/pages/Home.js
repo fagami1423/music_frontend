@@ -1,89 +1,112 @@
-import UploadForm from '../components/UploadForm'
-import NoteImage from '../components/NoteImage'
+import UploadForm from "../components/UploadForm";
+import NoteImage from "../components/NoteImage";
 import MSlider from "../components/MSlider";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faDrum, faKeyboard, faMusic } from "@fortawesome/free-solid-svg-icons";
-
-import { useState } from 'react';
+import api from "../Config";
 
 
-const Home=()=>{
+import { useState } from "react";
+import { selectClasses } from "@mui/material";
+
+const Home = () => {
+    const [numBar, setNumBars] = useState(0);
+    const [numSample, setNumSample] = useState(0);
+    const [selectedInstrument, setSelectedInstrument] = useState(null);
     const [showGenerate, setShowGenerate] = useState(false);
     const [showMix, setShowMix] = useState(false);
+
     const handleGenerateClick = () => {
         setShowGenerate(true);
         setShowMix(false);
-      };
-    
-      const handleMixClick = () => {
+    };
+
+    const handleMixClick = () => {
         setShowGenerate(false);
         setShowMix(true);
-      };
+    };
+
+    const handleSlider1Change = (sliderValue) => {
+        setNumBars(sliderValue);
+        // Do something with the sliderValue
+    };
+    const handleSlider2Change = (sliderValue) => {
+        setNumSample(sliderValue);
+        // Do something with the sliderValue
+    };
+    const handleInstrumentChange = (event) => {
+        setSelectedInstrument(event.target.value);
+    };
+    const handleGenerateButton = () => {
+        if(selectedInstrument ===null || numBar===0 || numSample===0){
+            alert("Pease select the parameters before you party");
+        } else {
+            const oj= {
+                "numbars":numBar,
+                "numSample":numSample,
+                "instrument":selectedInstrument
+            }
+            let axiosConfig = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            // api.post(`/`+selectedInstrument, oj, axiosConfig);
+            // window.location="/music-list";
+            console.log(oj);
+            console.log("Generate the music ");
+        }  
+    };
+
     return (
         <>
-            <NoteImage />
-            {/* <div className="row"> */}
-            <div className="row buttons">
-                <div className={` col-6 generate-button ${showGenerate ? "active" : ""}`} onClick={handleGenerateClick}>
-                    <label htmlFor="generate" className="button-label">
-                    <i className="fas fa-music"></i>
-                    Generate
-                    </label>
-                    <input type="radio" id="generate" name="button" value="generate" className="button-radio" />
-                </div>
-                <div className={`col-6 mix-button ${showMix ? "active" : ""}`} onClick={handleMixClick}>
-                    <label htmlFor="mix" className="button-label">
-                    <i className="fas fa-headphones"></i>
-                    Mix
-                    </label>
-                    <input type="radio" id="mix" name="button" value="mix" className="button-radio" />
-                </div>
-            {/* </div> */}
-                
-                <div className={`generate-options ${showGenerate ? "show" : ""}`}>
-                    <h2>Select the Type </h2>
-                    <div className="options">
-                    <label htmlFor="drum" className="tile">
-                    <input type="radio" id="drum" name="instrument" value="drum" className="radio-button" />
-                    Drum
-                    </label>
-                    <label htmlFor="piano" className="tile">
-                    <input type="radio" id="piano" name="instrument" value="piano" className="radio-button" />
-                    Piano
-                    </label>
-                    <label htmlFor="groove" className="tile">
-                    <input type="radio" id="groove" name="instrument" value="groove" className="radio-button" />
-                    Groove
-                    </label>
-                    <div className="sliders ">
-                        <MSlider  title="number of batches" default="40"/>
-                        <MSlider  title="number of " default="40"/>
-                    </div>
-                    </div>
-                </div>
-                <div className={`mix-options ${showMix ? "show" : ""}`}>
-                    <h2>Mix Options</h2>
-                    <UploadForm />
-                    {/* <div className="options">
-                    <label htmlFor="file">Upload File:</label>
-                    <input type="file" id="file" name="file" />
-                    <div className="sliders">
-                        <label htmlFor="slider3">Slider 3:</label>
-                        <input type="range" id="slider3" name="slider3" min="0" max="10" />
-                        <label htmlFor="slider4">Slider 4:</label>
-                        <input type="range" id="slider4" name="slider4" min="0" max="10" />
-                    </div>
-                    <select>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                    </select>
-                    </div> */}
-                </div>
-                            
+          <NoteImage />
+          <div className="row">
+            <div className="col-12 buttons">
+              <div className={`col-6 generate-button ${showGenerate ? "active" : ""}`} onClick={handleGenerateClick}>
+                <label htmlFor="generate" className="button-label">
+                  <i className="fas fa-music"></i>
+                  Generate
+                </label>
+                <input type="radio" id="generate" name="button" value="generate" className="button-radio" />
+              </div>
+              <div className={`col-6 mix-button ${showMix ? "active" : ""}`} onClick={handleMixClick}>
+                <label htmlFor="mix" className="button-label">
+                  <i className="fas fa-headphones"></i>
+                  Mix
+                </label>
+                <input type="radio" id="mix" name="button" value="mix" className="button-radio" />
+              </div>
             </div>
+            <div className={`row generate-options ${showGenerate ? "show" : ""}`}>
+              <h2>Select Intstrument</h2>
+              <div className="options">
+                <label htmlFor="drum" className="tile">
+                  <input type="radio" id="drum" name="instrument" value="drum" className="radio-button"  onChange={handleInstrumentChange} />
+                  Drum
+                </label>
+                <label htmlFor="piano" className="tile">
+                  <input type="radio" id="piano" name="instrument" value="piano" className="radio-button"  onChange={handleInstrumentChange} />
+                  Piano
+                </label>
+                <label htmlFor="groove" className="tile">
+                  <input type="radio" id="groove" name="instrument" value="groove" className="radio-button"  onChange={handleInstrumentChange} />
+                  Groove
+                </label>
+                <div className="row sliders justify-content-center">
+                  <MSlider title="Number of Bars" default="60" onChange={handleSlider1Change} />
+                  <MSlider title="Number of Samples" default="30" onChange={handleSlider2Change} />
+                </div>
+                <button onClick={handleGenerateButton} className="btn btn-secondary">
+                  Let's Party
+                </button>
+              </div>
+            </div>
+            <div className={`row justify-content-center mix-options ${showMix ? "show" : ""}`}>
+              <h2>Mix Options</h2>
+              <UploadForm />
+            </div>
+          </div>
         </>
-    )
+      );
 };
 
 export default Home;

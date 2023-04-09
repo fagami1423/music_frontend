@@ -4,11 +4,27 @@ import { useState } from "react";
 
 import api from '../Config';
 import FileUploader from "./FileUploader";
+import MSlider from "./MSlider";
 
 const UploadForm = ()=>{
     // const history = useHistory();
     const [selectedFile, setSelectedFile] = useState(null);
 
+    const handleBeamSize = (newValue) =>{
+
+    };
+    const handleTemperature = (newValue) =>{
+        
+    };
+    const handleBranchFactor = (newValue) =>{
+        
+    };
+    const handleNotes = (newValue) =>{
+        
+    };
+    const handleTotalSteps = (newValue) =>{
+        
+    }
     const submitForm = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -22,17 +38,22 @@ const UploadForm = ()=>{
             }
           };
         api.post(`/upload-music`, formData, axiosConfig);
-        window.location="/music";
+        // window.location="/music";
         // history.push("/music")
         
     };
     return (
-        <div className="row">
+        <div className="row justify-content-center">
             <form >
                 <FileUploader
                     onFileSelectSuccess={(file) => setSelectedFile(file)}
                     onFileSelectError={({ error }) => alert(error)}
                 />
+                <MSlider title="Temperature" default="60" onChange={handleTemperature} />
+                <MSlider title="Beam Size" default="30" onChange={handleBeamSize} />
+                <MSlider title="Branch Factor" default="30" onChange={handleBranchFactor} />
+                <MSlider title="Notes Per Sec" default="30" onChange={handleNotes} />
+                <MSlider title="Total Steps" default="30" onChange={handleTotalSteps} />
                 <button onClick={submitForm} className="btn btn-primary bg-dark justify-content-right">Mix</button>
             </form>
         </div>
