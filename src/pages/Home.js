@@ -13,7 +13,10 @@ const Home = () => {
     const [selectedInstrument, setSelectedInstrument] = useState(null);
     const [showGenerate, setShowGenerate] = useState(false);
     const [showMix, setShowMix] = useState(false);
+    const [inputValue, setInputValue] = useState('');
 
+    // parameters
+    
     const handleGenerateClick = () => {
         setShowGenerate(true);
         setShowMix(false);
@@ -35,14 +38,18 @@ const Home = () => {
     const handleInstrumentChange = (event) => {
         setSelectedInstrument(event.target.value);
     };
+    const handleFilename = (event) => {
+        setInputValue(event.target.value);
+    }
     const handleGenerateButton = () => {
-        if(selectedInstrument ===null || numBar===0 || numSample===0){
+        if(selectedInstrument === null || numBar === 0 || numSample === 0){
             alert("Pease select the parameters before you party");
         } else {
             const oj= {
                 "numbars":numBar,
                 "numSample":numSample,
-                "instrument":selectedInstrument
+                "instrument":selectedInstrument,
+                "filename":inputValue
             }
             let axiosConfig = {
                 headers: {
@@ -60,20 +67,24 @@ const Home = () => {
         <>
           <NoteImage />
           <div className="row">
-            <div className="col-12 buttons">
+            <div className="buttons">
               <div className={`col-6 generate-button ${showGenerate ? "active" : ""}`} onClick={handleGenerateClick}>
+              
                 <label htmlFor="generate" className="button-label">
                   <i className="fas fa-music"></i>
+                  <input type="radio" id="generate" name="button" value="generate" className="button-radio" />
                   Generate
                 </label>
-                <input type="radio" id="generate" name="button" value="generate" className="button-radio" />
+               
               </div>
               <div className={`col-6 mix-button ${showMix ? "active" : ""}`} onClick={handleMixClick}>
+                
                 <label htmlFor="mix" className="button-label">
                   <i className="fas fa-headphones"></i>
+                  <input type="radio" id="mix" name="button" value="mix" className="button-radio" />
                   Mix
                 </label>
-                <input type="radio" id="mix" name="button" value="mix" className="button-radio" />
+                
               </div>
             </div>
             <div className={`row generate-options ${showGenerate ? "show" : ""}`}>
@@ -95,6 +106,9 @@ const Home = () => {
                   <MSlider title="Number of Bars" default="60" onChange={handleSlider1Change} />
                   <MSlider title="Number of Samples" default="30" onChange={handleSlider2Change} />
                 </div>
+                
+                <input className="bg-dark color-white" style={{'color':'white','width':"38%"}} id="filename" value={inputValue} placeholder="Enter filename" name="filename" onChange={handleFilename}></input>
+                
                 <button onClick={handleGenerateButton} className="btn btn-secondary">
                   Let's Party
                 </button>

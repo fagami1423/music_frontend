@@ -9,26 +9,37 @@ import MSlider from "./MSlider";
 const UploadForm = ()=>{
     // const history = useHistory();
     const [selectedFile, setSelectedFile] = useState(null);
+    const [beamSize, setBeamSize] = useState(0);
+    const [temperature, setTemperature] = useState(0);
+    const [branchFactor, setBranchFactor] = useState(0);
+    const [notes, setNotes] = useState(0);
+    const [totalSteps, setTotalSteps] = useState(0);
 
     const handleBeamSize = (newValue) =>{
-
+        setBeamSize(newValue);
     };
     const handleTemperature = (newValue) =>{
-        
+        setTemperature(newValue);
     };
     const handleBranchFactor = (newValue) =>{
-        
+        setBranchFactor(newValue);
     };
     const handleNotes = (newValue) =>{
-        
+        setNotes(newValue);
     };
     const handleTotalSteps = (newValue) =>{
-        
-    }
+        setTotalSteps(newValue);
+    };
     const submitForm = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("file",selectedFile);
+        formData.append('beamsize', beamSize);
+        formData.append('temperature', temperature);
+        formData.append('branchFactor', branchFactor);
+        formData.append('notes', notes);
+        formData.append('totalSteps', totalSteps);
+
         for(var pair of formData.entries()) {
             console.log(`${pair[0]}: ${pair[1]}`);
           }
@@ -38,7 +49,7 @@ const UploadForm = ()=>{
             }
           };
         api.post(`/upload-music`, formData, axiosConfig);
-        // window.location="/music";
+        window.location="/music-list";
         // history.push("/music")
         
     };
