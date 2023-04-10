@@ -40,17 +40,25 @@ const UploadForm = ()=>{
         formData.append('notes', notes);
         formData.append('totalSteps', totalSteps);
 
-        for(var pair of formData.entries()) {
-            console.log(`${pair[0]}: ${pair[1]}`);
-          }
+        // for(var pair of formData.entries()) {
+        //     console.log(`${pair[0]}: ${pair[1]}`);
+        //   }
         let axiosConfig = {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
           };
-        api.post(`/upload-music`, formData, axiosConfig);
-        window.location="/music-list";
-        // history.push("/music")
+        console.log("Before api hit ");
+
+        try {
+            const response = await api.post(`/upload-music`, formData, axiosConfig);
+            console.log("hello world im here");
+            console.log(response.data);
+        
+        } catch (error) {
+            console.error('Error uploading file:', error);
+        }
+    
         
     };
     return (
