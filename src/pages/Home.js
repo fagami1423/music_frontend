@@ -69,18 +69,22 @@ const Home = () => {
           <div className="row">
             <div className="buttons">
               <div className={`col-6 generate-button ${showGenerate ? "active" : ""}`} onClick={handleGenerateClick}>
+              
                 <label htmlFor="generate" className="button-label">
                   <i className="fas fa-music"></i>
+                  <input type="radio" id="generate" name="button" value="generate" className="button-radio" />
                   Generate
                 </label>
-                <input type="radio" id="generate" name="button" value="generate" className="button-radio" />
+               
               </div>
               <div className={`col-6 mix-button ${showMix ? "active" : ""}`} onClick={handleMixClick}>
+                
                 <label htmlFor="mix" className="button-label">
                   <i className="fas fa-headphones"></i>
+                  <input type="radio" id="mix" name="button" value="mix" className="button-radio" />
                   Mix
                 </label>
-                <input type="radio" id="mix" name="button" value="mix" className="button-radio" />
+                
               </div>
             </div>
             <div className={`row generate-options ${showGenerate ? "show" : ""}`}>
