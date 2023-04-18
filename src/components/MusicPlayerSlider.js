@@ -12,6 +12,8 @@ import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import VolumeUpRounded from '@mui/icons-material/VolumeUpRounded';
 import VolumeDownRounded from '@mui/icons-material/VolumeDownRounded';
 
+import MidiPlayer from 'midi-player-js';
+
 import {api, baseUrl} from '../Config';
 
 const Widget = styled('div')(({ theme }) => ({
@@ -68,21 +70,53 @@ export default function MusicPlayerSlider(prop) {
   const sound = baseUrl+prop.musicFile.url;
   const [audio] = React.useState(new Audio(sound));
   
-  
+  const playerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    playerRef.current = new MidiPlayer.Player(function (event) {
+      if (event.name === "Note on" && event.velocity > 0) {
+        console.log("Note on");
+      } else if (event.name === "Note off" || (event.name === "Note on" && event.velocity === 0)) {
+        console.log("Note off");
+      }
+    });
+
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.stop();
+      }
+    };
+  }, []);
   
   const playAudio = async () => {
-      // const response = await api.get(`/get-music`);
+    // Check if the music file is a MIDI file
+    if (prop.musicFile.url.endsWith(".mid")) {
+      if (!playerRef.current) {
+        return;
+      }
+  
+      if (playerRef.current.isPlaying()) {
+        playerRef.current.pause();
+      } else {
+        const response = await fetch(sound);
+        const arrayBuffer = await response.arrayBuffer();
+        playerRef.current.loadData(arrayBuffer);
+        playerRef.current.play();
+      }
+    } else {
+      // Your existing code for non-MIDI files
       audio.src = sound;
       console.log(audio.src);
-      audio.addEventListener("loadedmetadata", function() {
+      audio.addEventListener("loadedmetadata", function () {
         setDuration(audio.duration);
       });
       setPaused(!paused);
-      if(paused === false){
+      if (paused === false) {
         audio.pause();
-      }else{
+      } else {
         audio.play();
       }
+    }
   };
 
   const handleVolumeChange = (event, newValue) => {
