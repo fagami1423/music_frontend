@@ -56,9 +56,9 @@ const Home = () => {
                     'Content-Type': 'application/json'
                 }
             };
-            // api.post(`/`+selectedInstrument, oj, axiosConfig);
+            const response = api.post(`/`+selectedInstrument, oj, axiosConfig);
             // window.location="/music-list";
-            console.log(oj);
+            console.log(response.data);
             console.log("Generate the music ");
         }  
     };
