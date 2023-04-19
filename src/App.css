@@ -1,7 +1,8 @@
-body{
+body {
   background-color: black;
-  background: linear-gradient(to right, rgb(0, 0, 0) , rgb(125, 125, 158));
+  background: linear-gradient(to right, rgb(0, 0, 0), rgb(125, 125, 158));
 }
+
 .App {
   text-align: center;
 }
@@ -11,42 +12,22 @@ body{
   pointer-events: none;
 }
 
-.custom-circle{
+.custom-circle {
   width: 200px;
   height: 200px;
   background-color: rgb(56, 179, 216);
 }
 
-.music-background{
+.music-background {
   height: 90%;
   width: 70%;
   margin-bottom: 60px;
-  /* background-color: rgb(300,300,300); */
-  background:transparent;
-  /* opacity: 0.9 */
-}
-/* 
-.custom-file-upload {
-  border: 2px solid #ccc;
-  display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  color: #555;
-  border-radius: 4px;
-  background-color: #fff;
-}
-.custom-file-upload:hover {
-  background-color: #f5f5f5;
-}
-.custom-file-upload i {
-  margin-right: 10px;
-} */
-#file-upload, #cancel{
-  display: none;
+  background: transparent;
 }
 
+#file-upload, #cancel {
+  display: none;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -75,5 +56,38 @@ body{
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Responsive styles for different devices */
+@media screen and (max-width: 1024px) {
+  .music-background {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .custom-circle {
+    width: 150px;
+    height: 150px;
+  }
+
+  .music-background {
+    width: 100%;
+  }
+
+  .App-header {
+    font-size: calc(10px + 1vmin);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .custom-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .App-header {
+    font-size: calc(8px + 1vmin);
   }
 }
