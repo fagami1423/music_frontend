@@ -1,0 +1,27 @@
+.transparent_card {
+  position: relative;
+  border: none; /* Remove border */
+  color: #ffffff; /* Set text color to white */
+  overflow: hidden; /* Hide any overflowing content from the pseudo-element */
+}
+
+.transparent_card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(187, 187, 214, 0.2);
+  z-index: -1; /* Set z-index lower than the content to display the gradient behind the text */
+}
+
+.transparent_card .card-title {
+  font-weight: 500;
+}
+
+.card-img {
+  object-fit: cover; /* Ensure the album image is scaled properly */
+  width: 50px;
+  height: 50px;
+}

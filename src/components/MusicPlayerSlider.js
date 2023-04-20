@@ -146,7 +146,7 @@ export default function MusicPlayerSlider(prop) {
           <CoverImage>
             <img
               alt="can't win - Chilling Sunday"
-              src={process.env.PUBLIC_URL+'/sidebar1.gif'}
+              src={process.env.PUBLIC_URL+'/animate.gif'}
             />
           </CoverImage>
           <Box sx={{ ml: 1.5, minWidth: 0 }}>
@@ -219,7 +219,7 @@ export default function MusicPlayerSlider(prop) {
             <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
           </IconButton>
           <IconButton
-            aria-label={paused ? 'play' : 'pause'}
+            aria-label={paused ? 'pause' : 'play'}
             onClick={playAudio}
           >
             {paused ? (

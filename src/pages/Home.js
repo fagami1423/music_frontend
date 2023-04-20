@@ -107,8 +107,8 @@ const Home = () => {
                   Groove
                 </label>
                 <div className="row sliders justify-content-center">
-                  <MSlider title="Number of Bars" default="60" onChange={handleSlider1Change} />
-                  <MSlider title="Number of Samples" default="30" onChange={handleSlider2Change} />
+                  <MSlider title="Number of Bars" default="0" onChange={handleSlider1Change} />
+                  <MSlider title="Number of Samples" default="0" onChange={handleSlider2Change} />
                 </div>
                 
                 <input className="bg-dark color-white" style={{'color':'white','width':"38%"}} id="filename" value={inputValue} placeholder="Enter filename" name="filename" onChange={handleFilename}></input>

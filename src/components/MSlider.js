@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 
 
 export default function Mslider(props) {
-  const [value, setValue] = React.useState(30);
+  const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
     if (props.onChange) {

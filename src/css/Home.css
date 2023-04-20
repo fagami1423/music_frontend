@@ -117,7 +117,7 @@ button {
   .buttons {
     display: flex;
     justify-content: center;
-    margin: 20px;
+    margin: 10px;
     
   }
   
@@ -127,21 +127,28 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    background-color: linear-gradient(to right, rgb(0, 0, 0), rgb(125, 125, 158));
+    background: linear-gradient(to right, rgb(221, 10, 10), rgb(125, 125, 158));
     border: 2px solid #ccc;
     margin: 10px;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
   }
+  .generate-button:hover,
+  .mix-button:hover {
+    transform: scale(1.5);
+    color: black;
+    background: linear-gradient(to left, rgb(242, 77, 11), rgb(118, 146, 80));
+    /* opacity: 0.5; */
+  }
   
   .generate-button.active,
   .mix-button.active {
-    transform: scale(1.1);
+    transform: scale(1.3);
     color: black;
-    background-color: #f1f1f1;
+    background: linear-gradient(to right, rgb(247, 195, 6), rgb(165, 158, 158));
   }
   
   .button-label {
