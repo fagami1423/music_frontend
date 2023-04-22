@@ -52,7 +52,7 @@ const UploadForm = ()=>{
 
         try {
             const response = await api.post(`/upload-music`, formData, axiosConfig);
-            console.log("hello world im here");
+            window.location="/musiclist";
             console.log(response.data);
         
         } catch (error) {

@@ -61,7 +61,7 @@ const Home = () => {
                 }
             };
             const response = api.post(`/`+selectedInstrument, oj, axiosConfig);
-            // window.location="/music-list";
+            window.location="/musiclist";
             console.log(response.data);
             console.log("Generate the music ");
         }  
