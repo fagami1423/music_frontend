@@ -69,14 +69,15 @@ const MusicList = () => {
   }, []);
 
   return (
-    <div>
+    <>
        {/* <NoteImage /> */}
     {isLoading ? (
-            <div className="row text-center mt-5">
+            <div className="text-center mt-5">
             <div className="loader"></div>
             </div>
     ) : (<>
-                <div className="container ml-4">
+                <div className="container ml-4"> 
+                    
                     
                     <div className="row">
                     <div className="col-12">
@@ -190,7 +191,7 @@ const MusicList = () => {
                     <MusicPlayerSlider musicFile={selectSong} isItemSelected={isItemSelected} />
                 </div>
         </>)}
-    </div>
+    </>
   );
 };
 
