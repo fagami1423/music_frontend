@@ -9,7 +9,27 @@ In the project directory, you can run:
 
 To install node please follow the instruction: https://github.com/nvm-sh/nvm
 Recommended node versions 14.1.0 ++
-
+### The project folder structure 
+```
+|-- node_modules/
+|-- public/
+|-- src/
+    |-- components/
+    |-- css/
+    |-- pages/
+    |-- services/
+    |-- App.css
+    |-- App.js
+    |== Config.js
+    |-- Env.js
+|-- .dockerignore
+|-- .gitignore
+|-- docker-compose.yml
+|-- Dockerfile
+|-- .gitignore
+|-- package.json
+|__ README.md
+```
 ### Run the commands 
 To run the project
 ```
