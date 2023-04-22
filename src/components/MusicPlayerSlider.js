@@ -48,12 +48,13 @@ const TinyText = styled(Typography)({
   letterSpacing: 0.2,
 });
 
-export default function MusicPlayerSlider(prop) {
+export default function MusicPlayerSlider({musicFile, isItemSelected}) {
   
   const theme = useTheme();
   const [duration,setDuration] = React.useState(200);
   const [position, setPosition] = React.useState(32);
-  const [paused, setPaused] = React.useState(false);
+  // const [paused, setPaused] = React.useState(true);
+  const [changePlay,setChangePlay] = React.useState(true);
   const [volume, setVolume] = React.useState(30);
   const [audioCtx, setAudioCtx] = React.useState(null);
   const [gainNode, setGainNode] = React.useState(null);
@@ -67,12 +68,41 @@ export default function MusicPlayerSlider(prop) {
     theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
 
   // play music with Audio object the sound 
-  const sound = baseUrl+prop.musicFile.url;
+  const sound = baseUrl+musicFile.url;
   const [audio] = React.useState(new Audio(sound));
   
   const playerRef = React.useRef(null);
 
   React.useEffect(() => {
+    // console.log("index",selectedIndex);
+    
+    if (isItemSelected === true) {
+      console.log("here iam ")
+      setChangePlay(true);
+      // console.log(changePlay);
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+        
+      }
+    
+      if (playerRef.current && playerRef.current.isPlaying()) {
+        playerRef.current.stop();
+      }
+      
+      playAudio();
+      setChangePlay(false);
+
+    };
+    
+    // if (audio && audio.src !== sound) {
+    //   audio.pause();
+    //   audio.src = sound;
+  
+    //   setPaused(true);
+    // }
+  
+   
     playerRef.current = new MidiPlayer.Player(function (event) {
       if (event.name === "Note on" && event.velocity > 0) {
         console.log("Note on");
@@ -86,11 +116,22 @@ export default function MusicPlayerSlider(prop) {
         playerRef.current.stop();
       }
     };
-  }, []);
+  }, [musicFile,isItemSelected]);
+
+  const handlePlayButton = () => {
+    if (changePlay === true) {
+      playAudio(true);
+      setChangePlay(false);
+    } else {
+      playAudio(false);
+      setChangePlay(true);
+     
+    }
+  }
   
-  const playAudio = async () => {
+  const playAudio = async (paused) => {
     // Check if the music file is a MIDI file
-    if (prop.musicFile.url.endsWith(".mid")) {
+    if (musicFile.url.endsWith(".mid")) {
       if (!playerRef.current) {
         return;
       }
@@ -110,12 +151,16 @@ export default function MusicPlayerSlider(prop) {
       audio.addEventListener("loadedmetadata", function () {
         setDuration(audio.duration);
       });
-      setPaused(!paused);
+      // audio.play();
+
       if (paused === false) {
         audio.pause();
+        // setPaused(true);
       } else {
         audio.play();
+        // setPaused(false);
       }
+      // setPaused(false);
     }
   };
 
@@ -127,6 +172,7 @@ export default function MusicPlayerSlider(prop) {
   };
 
   React.useEffect(() => {
+  
     const newAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
     const newGainNode = newAudioCtx.createGain();
     newGainNode.connect(newAudioCtx.destination);
@@ -146,15 +192,15 @@ export default function MusicPlayerSlider(prop) {
           <CoverImage>
             <img
               alt="can't win - Chilling Sunday"
-              src={process.env.PUBLIC_URL+'/sidebar1.gif'}
+              src={process.env.PUBLIC_URL+'/animate.gif'}
             />
           </CoverImage>
           <Box sx={{ ml: 1.5, minWidth: 0 }}>
             <Typography variant="caption" color="text.secondary" fontWeight={500}>
-              Jun Pulse
+              Now Playing
             </Typography>
             <Typography noWrap>
-              <b>{prop.musicFile.filename}</b>
+              <b>{musicFile.filename}</b>
             </Typography>
             <Typography noWrap letterSpacing={-0.25}>
               
@@ -205,7 +251,7 @@ export default function MusicPlayerSlider(prop) {
           }}
         >
           <TinyText>{formatDuration(position)}</TinyText>
-          <TinyText>-{formatDuration(duration - position)}</TinyText>
+          <TinyText>-{musicFile.duration}</TinyText>
         </Box>
         <Box
           sx={{
@@ -219,10 +265,10 @@ export default function MusicPlayerSlider(prop) {
             <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
           </IconButton>
           <IconButton
-            aria-label={paused ? 'play' : 'pause'}
-            onClick={playAudio}
+            aria-label={changePlay ? 'play' : 'pause'}
+            onClick={handlePlayButton}
           >
-            {paused ? (
+            {changePlay ? (
               <PlayArrowRounded
                 sx={{ fontSize: '3rem' }}
                 htmlColor={mainIconColor}
