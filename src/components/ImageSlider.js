@@ -41,7 +41,9 @@ const ImageSlider = ({ images }) => {
         </div>
         <div className="slider-content">
             <h1>{user.name}</h1>
-            <h2>{user.designation}</h2>
+            <p>{user.email}</p>
+            <p>{user.phone}</p>
+            <p><b>{user.profession}</b></p>
             <p>{user.text}</p>
 
 

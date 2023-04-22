@@ -4,7 +4,7 @@ import MSlider from "../components/MSlider";
 import api from "../Config";
 
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { selectClasses } from "@mui/material";
 
 const Home = () => {
@@ -15,16 +15,20 @@ const Home = () => {
     const [showMix, setShowMix] = useState(false);
     const [inputValue, setInputValue] = useState('');
 
-    // parameters
+    const containerRef = useRef(null);
     
     const handleGenerateClick = () => {
         setShowGenerate(true);
         setShowMix(false);
+        const container = containerRef.current;
+        container.scrollTo({ top: 50, behavior: 'smooth' });
     };
 
     const handleMixClick = () => {
         setShowGenerate(false);
         setShowMix(true);
+        const container = containerRef.current;
+        container.scrollTo({ top: 50, behavior: 'smooth' });
     };
 
     const handleSlider1Change = (sliderValue) => {
@@ -87,7 +91,7 @@ const Home = () => {
                 
               </div>
             </div>
-            <div className={`row generate-options ${showGenerate ? "show" : ""}`}>
+            <div className={`row generate-options ${showGenerate ? "show" : ""}`} ref={containerRef}>
               <h2>Select Intstrument</h2>
               <div className="options">
                 <label htmlFor="drum" className="tile">
@@ -103,8 +107,8 @@ const Home = () => {
                   Groove
                 </label>
                 <div className="row sliders justify-content-center">
-                  <MSlider title="Number of Bars" default="60" onChange={handleSlider1Change} />
-                  <MSlider title="Number of Samples" default="30" onChange={handleSlider2Change} />
+                  <MSlider title="Number of Bars" default="0" onChange={handleSlider1Change} />
+                  <MSlider title="Number of Samples" default="0" onChange={handleSlider2Change} />
                 </div>
                 
                 <input className="bg-dark color-white" style={{'color':'white','width':"38%"}} id="filename" value={inputValue} placeholder="Enter filename" name="filename" onChange={handleFilename}></input>
@@ -114,7 +118,7 @@ const Home = () => {
                 </button>
               </div>
             </div>
-            <div className={`row justify-content-center mix-options ${showMix ? "show" : ""}`}>
+            <div className={`row justify-content-center mix-options ${showMix ? "show" : ""}`} ref={containerRef}>
               <h2>Mix Options</h2>
               <UploadForm />
             </div>
